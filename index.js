@@ -7,7 +7,7 @@ const htmlPage = path.join(__dirname, "index.html");
 console.log("server started!");
 
 app.use(express.static("./"));
-app.get("/", function(req, res) {
+app.get("/webview", function(req, res) {
   res.sendFile(htmlPage);
 });
 
