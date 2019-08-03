@@ -12,7 +12,7 @@ app.use(express.static("./"));
 app.get("/webview", function(req, res) {
   const ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
 
-  console.log(ip);
+  console.log("@@ IP @@@ ", ip);
   res.sendFile(htmlPage);
 });
 
@@ -27,9 +27,7 @@ app.get("/getBotFields", function(req, res) {
 
 app.get("/geocodeAdress", function(req, res) {
   const textQuery = req.query.searchtext;
-  console.log("get adr ", req.query.searchtext);
   here.geocodeAdress(encodeURIComponent(textQuery), data => {
-    console.log(data);
     res.setHeader("Content-Type", "application/json");
     res.end(data);
   });

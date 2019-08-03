@@ -35,7 +35,6 @@ window.webviewOnLoad = function() {
 
 function makeRequest(url, params, cb) {
   var request = new XMLHttpRequest();
-  console.log("p ", params);
   if (params) {
     url = `${url}?${buildURL(params)}`;
   }

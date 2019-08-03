@@ -13,7 +13,6 @@ const getOptions = searchText => ({
 });
 
 function makeSearch(text) {
-  console.log("txt", text);
   return text
     .replace(/,/g, "")
     .split(" ")
@@ -26,13 +25,8 @@ function geocodeAdress(searchString, cb) {
   req.on("response", function(res) {
     res.on("data", function(data) {
       const response = data.toString("utf8");
-      console.log("data has arrived ", response);
       cb(response);
     });
-
-    console.log("response");
-    console.log(res.statusCode);
-    console.log(res.statusMessage);
   });
 
   req.end();
