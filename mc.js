@@ -8,7 +8,7 @@ const GET_BOT_FIELDS = "/fb/page/getBotFields";
 const SET_CUF = "";
 
 const options = {
-  hostname: "api.manychat.com",
+  hostname: API_HOST,
   path: "/fb/page/getBotFields",
   method: "GET",
   headers: {
@@ -17,18 +17,14 @@ const options = {
   }
 };
 
-function getBotFields() {
+function getBotFields(cb) {
   var req = https.request(options);
-  console.log(options);
 
   req.on("response", function(res) {
     res.on("data", function(data) {
-      console.log("data has arrived ", data.toString("utf8"));
+      const response = data.toString("utf8");
+      cb(response);
     });
-
-    console.log("response");
-    console.log(res.statusCode);
-    console.log(res.statusMessage);
   });
 
   req.end();

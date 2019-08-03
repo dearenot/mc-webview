@@ -11,7 +11,12 @@
   </head>
   <body>
   <div class="mapContainer" id="mapContainer"></div>
-  <script src="webview.js" charset="utf-8"></script>
+  <script>
+      function loadHandler() {
+        window.webviewOnLoad()
+      }
+    </script>
+  <script src="webview.js" charset="utf-8" onload=loadHandler()></script>
 
   </body>
 </html>
