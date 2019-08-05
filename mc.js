@@ -61,12 +61,3 @@ module.exports = {
   getBotFields,
   setCUF
 };
-
-setCUF(
-  {
-    subscriber_id: "2008030605927977",
-    field_id: 1788723,
-    field_value: "WAZUP"
-  },
-  data => console.log(data)
-);

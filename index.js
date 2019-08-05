@@ -45,11 +45,10 @@ app.get("/getBotFields", function(req, res) {
 });
 
 app.post("/setCUF", function(req, res) {
-  res.send("RESP POST");
-  // mc.setCUF(data => {
-  //   res.setHeader("Content-Type", "application/json");
-  //   res.end(data);
-  // });
+  mc.setCUF(data => {
+    res.setHeader("Content-Type", "application/json");
+    res.end(data);
+  });
 });
 
 app.get("/geocodeAdress", function(req, res) {
