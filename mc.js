@@ -17,6 +17,16 @@ const options = {
   }
 };
 
+const postOptions = {
+  hostname: API_HOST,
+  path: "/fb/subscriber/setCustomField",
+  method: "POST",
+  headers: {
+    accept: "application/json",
+    Authorization: TOKEN
+  }
+};
+
 function getBotFields(cb) {
   var req = https.request(options);
 
@@ -30,6 +40,33 @@ function getBotFields(cb) {
   req.end();
 }
 
+// "subscriber_id": 0,
+// "field_id": 0,
+// "field_value"
+
+function setCUF(data, cb) {
+  var req = https.request(postOptions);
+
+  req.on("response", function(res) {
+    res.on("data", function(data) {
+      const response = data.toString("utf8");
+      cb(response);
+    });
+  });
+  req.write(JSON.stringify(data));
+  req.end();
+}
+
 module.exports = {
-  getBotFields
+  getBotFields,
+  setCUF
 };
+
+setCUF(
+  {
+    subscriber_id: "2008030605927977",
+    field_id: 1788723,
+    field_value: "WAZUP"
+  },
+  data => console.log(data)
+);

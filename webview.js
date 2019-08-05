@@ -29,9 +29,34 @@ var ui = H.ui.UI.createDefault(map, maptypes, "ru-RU");
 
 window.webviewOnLoad = function() {
   makeRequest(API.getBotFields, null, data => {
+    console.log(window.appData, convertLatLang(window.appData.userLocation));
+    map.setCenter(convertLatLang(window.appData.userLocation));
+
     createMarkers(data.data);
   });
 };
+
+function makePostRequest(url, data, cb) {
+  var request = new XMLHttpRequest();
+
+  request.open("POST", url, true);
+
+  request.onload = function() {
+    if (this.status >= 200 && this.status < 400) {
+      // Success!
+      var resp = this.response;
+      cb(JSON.parse(resp));
+    } else {
+      // We reached our target server, but it returned an error
+    }
+  };
+
+  request.onerror = function() {
+    // There was a connection error of some sort
+  };
+
+  request.send(JSON.stringify(data));
+}
 
 function makeRequest(url, params, cb) {
   var request = new XMLHttpRequest();
@@ -80,16 +105,18 @@ function createMarkers(data) {
       var marker = new H.map.Marker(postion, { icon: icon });
       // map.addObject(marker);
       group.addObject(marker);
-      marker.addEventListener("tap", function(evt) {
-        console.log(evt);
+      console.log("@ S ", botField.value);
+      marker.addEventListener("tap", e => {
+        console.log(e, botField.value);
+        makePostRequest(API.setCUF, {
+          subscriber_id: window.appData.subscriberId,
+          field_id: window.appData.cufId,
+          field_value: botField.value
+        });
       });
     });
   });
 }
-
-// Add the marker to the map and center the map at the location of the marker:
-// map.addObject(marker);
-// map.setCenter(coords);
 
 const buildURL = data =>
   Object.entries(data)
@@ -98,7 +125,7 @@ const buildURL = data =>
 
 function convertLatLang({ Latitude, Longitude }) {
   return {
-    lng: Longitude,
-    lat: Latitude
+    lng: Longitude || 37.61,
+    lat: Latitude || 55.7
   };
 }
