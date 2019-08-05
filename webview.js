@@ -50,7 +50,7 @@ function makePostRequest(url, data, cb) {
       // We reached our target server, but it returned an error
     }
   };
-
+  request.setRequestHeader("Content-Type", "application/json");
   request.onerror = function() {
     // There was a connection error of some sort
   };
