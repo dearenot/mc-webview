@@ -102,6 +102,7 @@ function createMarkers(data) {
       // console.log(d.Response.View[0].Result[0].Location.DisplayPosition);
       const location = d.Response.View[0].Result[0].Location.DisplayPosition;
       const postion = convertLatLang(location);
+      console.log(position);
       var marker = new H.map.Marker(postion, { icon: icon });
       // map.addObject(marker);
       group.addObject(marker);
