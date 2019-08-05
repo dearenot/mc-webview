@@ -102,7 +102,6 @@ function createMarkers(data) {
       // console.log(d.Response.View[0].Result[0].Location.DisplayPosition);
       const location = d.Response.View[0].Result[0].Location.DisplayPosition;
       const position = convertLatLang(location);
-      console.log(position);
       var marker = new H.map.Marker(position, { icon: icon });
       // map.addObject(marker);
       group.addObject(marker);
@@ -126,7 +125,7 @@ const buildURL = data =>
 
 function convertLatLang({ Latitude, Longitude }) {
   return {
-    lng: Longitude || 37.61,
-    lat: Latitude || 55.7
+    lat: Latitude || 55.7,
+    lng: Longitude || 37.61
   };
 }
