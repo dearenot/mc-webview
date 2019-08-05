@@ -101,9 +101,9 @@ function createMarkers(data) {
     makeRequest(API.geocodeAdress, { searchtext: botField.value }, d => {
       // console.log(d.Response.View[0].Result[0].Location.DisplayPosition);
       const location = d.Response.View[0].Result[0].Location.DisplayPosition;
-      const postion = convertLatLang(location);
+      const position = convertLatLang(location);
       console.log(position);
-      var marker = new H.map.Marker(postion, { icon: icon });
+      var marker = new H.map.Marker(position, { icon: icon });
       // map.addObject(marker);
       group.addObject(marker);
       console.log("@ S ", botField.value);
