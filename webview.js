@@ -17,8 +17,8 @@ var map = new H.Map(
   document.getElementById("mapContainer"),
   maptypes.vector.normal.map,
   {
-    zoom: 10,
-    center: { lng: 37.61, lat: 55.7 },
+    zoom: 12,
+    center: convertLatLang(window.appData.userLocation),
     pixelRatio: window.devicePixelRatio || 1
   }
 );
