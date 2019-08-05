@@ -44,7 +44,9 @@ app.get("/getBotFields", function(req, res) {
   });
 });
 
+// add data here
 app.post("/setCUF", function(req, res) {
+  console.log("cuf req ", req.query, req.body);
   mc.setCUF(data => {
     res.setHeader("Content-Type", "application/json");
     res.end(data);
