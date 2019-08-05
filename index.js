@@ -5,6 +5,7 @@ const mc = require("./mc");
 const here = require("./here");
 const ipstack = require("./ipstack");
 const mustacheExpress = require("mustache-express");
+const bodyParser = require("body-parser");
 
 // const htmlPage = path.join(__dirname, "index.html");
 
