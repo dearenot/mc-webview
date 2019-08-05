@@ -108,11 +108,17 @@ function createMarkers(data) {
       console.log("@ S ", botField.value);
       marker.addEventListener("tap", e => {
         console.log(e, botField.value);
-        makePostRequest(API.setCUF, {
-          subscriber_id: window.appData.subscriberId,
-          field_id: window.appData.cufId,
-          field_value: botField.value
-        });
+        makePostRequest(
+          API.setCUF,
+          {
+            subscriber_id: window.appData.subscriberId,
+            field_id: window.appData.cufId,
+            field_value: botField.value
+          },
+          data => {
+            console.log("succesfully updated address");
+          }
+        );
       });
     });
   });
