@@ -1,4 +1,5 @@
 const https = require("https");
+const querystring = require("querystring");
 
 const API_KEY = "969729166560529:468893071986771c13db4d7f68558290";
 const TOKEN = `Bearer ${API_KEY}`;
@@ -23,6 +24,8 @@ const postOptions = {
   method: "POST",
   headers: {
     accept: "application/json",
+    "Content-Type": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
     Authorization: TOKEN
   }
 };
@@ -53,7 +56,8 @@ function setCUF(data, cb) {
       cb(response);
     });
   });
-  req.write(JSON.stringify(data));
+  req.write(querystring.stringify(data));
+
   req.end();
 }
 
