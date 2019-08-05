@@ -12,6 +12,8 @@ console.log("server started!");
 let USER_LOCATION = null;
 
 app.use(express.static("./"));
+app.use(express.urlencoded());
+app.use(express.json());
 app.listen(process.env.PORT || 8081);
 app.engine("html", mustacheExpress());
 app.set("view engine", "html");
