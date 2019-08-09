@@ -29,8 +29,7 @@ var ui = H.ui.UI.createDefault(map, maptypes, "ru-RU");
 
 window.webviewOnLoad = function() {
   makeRequest(API.getBotFields, null, data => {
-    console.log(window.appData, convertLatLang(window.appData.userLocation));
-    map.setCenter(convertLatLang(window.appData.userLocation));
+    // map.setCenter(convertLatLang(window.appData.userLocation));
 
     createMarkers(data.data);
   });
