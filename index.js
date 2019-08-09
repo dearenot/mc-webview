@@ -7,8 +7,6 @@ const ipstack = require("./ipstack");
 const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
 
-// const htmlPage = path.join(__dirname, "index.html");
-
 console.log("server started!");
 let USER_LOCATION = null;
 
@@ -31,6 +29,7 @@ app.get("/webview", function(req, res) {
   ipstack.getLocation(ip, loc => {
     USER_LOCATION = loc;
 
+    console.log(USER_LOCATION);
     res.render("index", {
       encodedJson: encodeURIComponent(
         JSON.stringify({
@@ -44,21 +43,18 @@ app.get("/webview", function(req, res) {
   console.log("@@ IP @@@ ", ip);
 });
 
-app.get("/getBotFields", function(req, res) {
-  mc.getBotFields(data => {
-    res.setHeader("Content-Type", "application/json");
-    res.end(data);
-  });
+app.get("/getBotFields", async function(_, res) {
+  const responseData = await mc.getBotFields();
+  console.log(responseData);
+  res.setHeader("Content-Type", "application/json");
+  res.end(responseData);
 });
 
-// add data here
-app.post("/setCUF", function(req, res) {
-  console.log("cuf req ", req.query, req.body);
+app.post("/setCUF", async function(req, res) {
   const data = req.body;
-  mc.setCUF(data, data => {
-    res.setHeader("Content-Type", "application/json");
-    res.end(data);
-  });
+  const responseData = await mc.setCustomField(data);
+  res.setHeader("Content-Type", "application/json");
+  res.end(responseData);
 });
 
 app.get("/geocodeAdress", function(req, res) {
