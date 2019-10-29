@@ -54,10 +54,15 @@ function postRequest(options = DEFAULT_POST_OPTIONS, body = {}) {
   var req = https.request(options);
 
   return new Promise((resolve, reject) => {
+    let responseData = "";
+
     req.on("response", function(res) {
       res.on("data", function(data) {
-        const response = data.toString("utf8");
-        resolve(response);
+        responseData += data;
+      });
+
+      res.on("end", function() {
+        resolve(responseData.toString("utf8"));
       });
     });
 
